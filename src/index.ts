@@ -10,6 +10,7 @@ import { promises as fs } from "fs";
 import { quickstart } from "./processDocument";
 import admin from "firebase-admin";
 import dotenv from "dotenv";
+import { onRequest } from "firebase-functions/v2/https";
 
 // Load environment variables from .env file
 dotenv.config();
@@ -63,3 +64,5 @@ const HOST_URL = config.hostUrl || "http://localhost";
 app.listen(PORT, () => {
   console.log(`Server is live @ ${HOST_URL}:${PORT}`);
 });
+
+exports.api = onRequest(app);
