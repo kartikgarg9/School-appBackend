@@ -127,4 +127,5 @@ dist
 .pnp.*
 
 
-ibukunfolay/node-firebase.git
+service-accountpro.json
+service-account.json
