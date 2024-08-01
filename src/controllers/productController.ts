@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import db from "../config/firebase";
-import Product from "../models/productModel";
+import Product from "./models/productModel";
 import {
   getFirestore,
   collection,

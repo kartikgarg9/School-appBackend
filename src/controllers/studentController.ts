@@ -10,7 +10,7 @@ import {
   deleteDoc,
 } from "firebase/firestore/lite";
 import db from "../config/firebase"; // Ensure this path is correct
-import Student from "../models/studentModel";
+import Student from "./models/studentModel";
 
 // Create a new student
 export const createStudent = async (
