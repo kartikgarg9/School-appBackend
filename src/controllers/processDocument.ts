@@ -1,12 +1,15 @@
 import { DocumentProcessorServiceClient } from "@google-cloud/documentai";
 import { promises as fs } from "fs";
-import creds from "../service-accountpro.json";
+
+import { addDoc, collection } from "firebase/firestore/lite";
+import creds from "../../service-accountpro.json";
+import { DocumentData } from ".././controllers/models/Document";
+import db from "../config/firebase";
 
 const projectId: string = "582710327787";
 const location: string = "us";
 const processorId: string = "f676c3413c749a21";
 
-// Define TypeScript interfaces for Document AI response
 interface TextAnchor {
   textSegments: Array<{
     startIndex?: number;
@@ -29,13 +32,14 @@ interface Document {
   pages: Page[];
 }
 
-// Instantiate the client
 const client = new DocumentProcessorServiceClient({
   apiEndpoint: "us-documentai.googleapis.com",
   credentials: creds,
 });
 
-export async function quickstart(filePath: string): Promise<string> {
+export async function extractTextFromDocumentUsingDocumentAI(
+  filePath: string
+): Promise<string> {
   const name = `projects/${projectId}/locations/${location}/processors/${processorId}`;
 
   const imageFile = await fs.readFile(filePath);
@@ -85,4 +89,18 @@ export async function quickstart(filePath: string): Promise<string> {
     console.error(`Error processing document: ${(error as Error).message}`);
     throw error;
   }
+}
+
+export async function savedDocumentId(payload: DocumentData): Promise<string> {
+  // Create a reference to the 'documents' subcollection
+  const collectionRef = collection(db, `users/${payload.uid}/documents`);
+
+  // Save document data
+  const docRef = await addDoc(collectionRef, {
+    ...payload,
+  });
+
+  console.log(`Document stored with ID: ${docRef.id}`);
+
+  return docRef.id;
 }

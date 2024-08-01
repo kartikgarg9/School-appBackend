@@ -1,4 +1,14 @@
 {
-  "indexes": [],
-  "fieldOverrides": []
+  "indexes": [
+    {
+      "collectionGroup": "documents",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "hash",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ]
 }

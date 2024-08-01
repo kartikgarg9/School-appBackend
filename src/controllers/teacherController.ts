@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import db from "../config/firebase"; // Ensure this path is correct
-import Teacher from "../models/teacherModel";
+import Teacher from "./models/teacherModel";
 import {
   getFirestore,
   collection,

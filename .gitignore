@@ -126,6 +126,7 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+uploads/
 
-service-accountpro.json
-service-account.json
+outputs/
+

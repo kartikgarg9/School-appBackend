@@ -1,4 +1,5 @@
 import { Request } from "express";
+import { UserInfo } from "firebase-admin/auth";
 
 declare global {
   namespace Express {
@@ -8,6 +9,7 @@ declare global {
         filename: string;
         mimetype: string;
       };
+      user?: UserInfo;
     }
   }
 }
